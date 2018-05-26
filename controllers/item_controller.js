@@ -1,5 +1,4 @@
 let express = require('express');
-//let item = require('../models/item.js');
 let orm = require('../config/orm.js');
 
 
@@ -7,25 +6,42 @@ let orm = require('../config/orm.js');
 
 // Routes
 // =============================================================
-module.exports = function(app) {
+module.exports = function (app) {
 
-  app.get("/api/all", function(req, res) {
+  app.get("/", function (req, res) {
 
-    orm.all(function(data) {
-      res.json(data);
+    orm.all(function (data) {
+      let obj = {
+        items: data
+      };
+      console.log(obj);
+      res.render("index", obj);
     });
 
   });
 
-  app.post("/list", function(req, res) {
+  app.get("/api/list", function (req, res) {
 
-    console.log(req.body);
+    orm.all(function (data) {
+      let obj = {
+        items: data
+      };
+      console.log(obj);
+      res.json(obj);
+    });
 
-    orm.add(
-      [item_name,is_complete],
-      [req.body.itemName,req.body.isComplete],
-      function(result){
-        res.json(result);
+  });
+
+  app.post("/api/new", function (req, res) {
+
+    console.log("posted " + req.body);
+
+    orm.add([
+      "item_name", "is_complete"
+    ],[
+      req.body.itemName, req.body.isComplete
+    ],function (result) {
+        res.end();
       });
 
   });
