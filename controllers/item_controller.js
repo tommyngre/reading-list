@@ -1,5 +1,6 @@
 let express = require('express');
-let orm = require('../config/orm.js');
+
+let item = require('../models/item.js');
 
 
 //create the router and export
@@ -10,7 +11,7 @@ module.exports = function (app) {
 
   app.get("/", function (req, res) {
 
-    orm.all(function (data) {
+    item.all(function (data) {
       let obj = {
         items: data
       };
@@ -22,7 +23,7 @@ module.exports = function (app) {
 
   app.get("/api/list", function (req, res) {
 
-    orm.all(function (data) {
+    item.all(function (data) {
       let obj = {
         items: data
       };
@@ -34,19 +35,26 @@ module.exports = function (app) {
 
   app.post("/api/new", function (req, res) {
 
-    orm.add([
-      "item_name", "is_complete"
-    ], [
-        req.body.itemName, Boolean(req.body.isComplete)
-      ], function (result) {
-        res.end();
-      });
+    item.add(
+      [
+        "item_name",
+        "is_complete"
+      ], [
+        req.body.itemName,
+        Boolean(req.body.isComplete)
+      ],
+      function (result) {
+        console.log("result "+result);
+        res.json({ id: result.insertId });
+        console.log("result.insertId "+result.insertId);
 
+      });
   });
 
   app.put("/api/list/:id", function (req, res) {
-    var condition = "id = " + req.params.id;
-    orm.update({
+    let condition = "id = " + req.params.id;
+
+    item.update({
       isComplete: req.body.isComplete
     }, condition, function (result) {
       if (result.changedRows == 0) {
@@ -60,7 +68,7 @@ module.exports = function (app) {
   app.delete("/api/list/:id", function (req, res) {
     var condition = "id = " + req.params.id;
 
-    orm.delete(condition, function (result) {
+    item.delete(condition, function (result) {
       if (result.affectedRows == 0) {
         return res.status(404).end();
       } else {
@@ -68,6 +76,5 @@ module.exports = function (app) {
       }
     });
   });
-  
-};
 
+};

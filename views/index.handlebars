@@ -12,9 +12,9 @@
 <h1>Reading List</h1>
 
 <ul>
-  {{#each cats}}
+  {{#each items}}
     {{#unless sleepy}}
-      {{> cats/cat-block sleep=true}}
+      {{> items/item-li isComplete=false}}
     {{/unless}}
   {{/each}}
 </ul>
@@ -23,9 +23,9 @@
 <section>
 <h1>Recent reads</h1>
 <ul>
-  {{#each cats}}
+  {{#each items}}
     {{#if sleepy}}
-      {{> cats/cat-block sleep=false}}
+      {{> items/item-li isComplete=true}}
     {{/if}}
   {{/each}}
 </ul>

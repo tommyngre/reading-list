@@ -49,8 +49,10 @@ let orm = {
     console.log(query);
 
     connection.query(query, vals, function (err, data) {
-      if (err) throw err;
-
+      if (err) {
+        throw err;
+      }
+      console.log(cb.toString());
       cb(data);
     });
   },
