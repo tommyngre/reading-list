@@ -1,16 +1,23 @@
 let connection = require('./connection.js')
 
-function colQMarks(cols) {
-  let str = '';
+function newVals(colVals) {
+  let arr = [];
 
-  cols.forEach(col => function () {
-    str += "??,";
-  });
+  for (let key in colVals) {
+    let value = colVals[key];
 
-  str = str.substring(0, str.length);
-  console.log(str);
-  return str;
-};
+    if (Object.hasOwnProperty.call(ob, key)) {
+      // if string with spaces, add quotations (Lana Del Grey => 'Lana Del Grey')
+      if (typeof value === "string" && value.indexOf(" ") >= 0) {
+        value = "'" + value + "'";
+      }
+      // e.g. {name: 'Lana Del Grey'} => ["name='Lana Del Grey'"]
+      // e.g. {sleepy: true} => ["sleepy=true"]
+      arr.push(key + "=" + value);
+    }
+  }
+  return arr.toString();
+}
 
 function questionMarks(vals) {
   let valsAry = vals.map(x => "?").join(",");
@@ -20,6 +27,7 @@ function questionMarks(vals) {
 
 
 let orm = {
+
   all: function (cb) {
 
     connection.query("select * from list", function (err, data) {
@@ -36,7 +44,7 @@ let orm = {
 
     let query = "insert into list ";
     query += "(" + cols + ") values ";
-    query += "(" + valQuestionMarks + ");"
+    query += "(" + valQuestionMarks + ");";
 
     console.log(query);
 
@@ -46,8 +54,10 @@ let orm = {
       cb(data);
     });
   },
-  update: function (cols, vals, cb) {
-    let query = 'update list set item_name=? where id=?';
+  update: function (colVals, condition, cb) {
+    let query = "update list set ";
+    query += newVals(colVals);
+    query += " where " + condition;
 
     console.log(query);
 
@@ -57,7 +67,21 @@ let orm = {
       cb(data);
     });
 
+  },
+  delete: function (condition, cb) {
+
+    let query = "delete from list";
+    query += " where " + condition;
+
+    console.log(query);
+
+    connection.query(query, function (error, result) {
+      if (err) {
+        throw err;
+      }
+      cb(result);
+    });
   }
-}
+};
 
 module.exports = orm;
