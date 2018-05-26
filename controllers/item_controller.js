@@ -26,7 +26,7 @@ module.exports = function (app) {
       let obj = {
         items: data
       };
-      console.log(obj);
+
       res.json(obj);
     });
 
@@ -34,12 +34,10 @@ module.exports = function (app) {
 
   app.post("/api/new", function (req, res) {
 
-    console.log("posted " + req.body);
-
     orm.add([
       "item_name", "is_complete"
     ],[
-      req.body.itemName, req.body.isComplete
+      req.body.itemName, Boolean(req.body.isComplete)
     ],function (result) {
         res.end();
       });
@@ -47,3 +45,28 @@ module.exports = function (app) {
   });
 
 };
+
+app.put("/api/list/:id", function(req, res) {
+  var condition = "id = " + req.params.id;
+  orm.update({
+    isComplete: req.body.isComplete
+  }, condition, function(result) {
+    if (result.changedRows == 0) {
+      return res.status(404).end();
+    } else {
+      res.status(200).end();
+    }
+  });
+});
+
+app.delete("/api/list/:id", function(req, res) {
+  var condition = "id = " + req.params.id;
+
+  orm.delete(condition, function(result) {
+    if (result.affectedRows == 0) {
+      return res.status(404).end();
+    } else {
+      res.status(200).end();
+    }
+  });
+});
