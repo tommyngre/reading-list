@@ -3,7 +3,7 @@ $(document).on('click', '#add', function () {
 
   let obj = {
     itemName: $('#item-name').val().trim(),
-    isComplete: false
+    is_complete: false
   }
 
   $.post('/api/new', obj, function (data) {
@@ -52,11 +52,7 @@ $(document).on('click', '.toggle-isComplete', function (event) {
       type: "PUT",
       data: update
     }).then(function () {
-      console.log(that);
-      console.log("iscomplete "+$(that).data('iscomplete'));
       $(that).data('iscomplete', newCompleteStatus);
-      console.log("iscomplete "+$(that).data('iscomplete'));
-      console.log("updated item # " + id);
-      //location.reload();
+      location.reload();
     })
 })

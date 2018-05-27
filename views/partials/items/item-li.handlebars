@@ -1,11 +1,12 @@
 <li>
-	{{item_name}}
-
-	<button class="toggle-isComplete" data-id="{{id}}" data-iscomplete="{{isComplete}}">
-		{{#if isComplete}}add back to list{{else}}mark complete{{/if}}
+  <div class="large-12 cell">
+	<h3>{{item_name}}</h3>
+	</div>
+	<button class="button small toggle-isComplete" data-id="{{id}}" data-iscomplete="{{isComplete}}">
+		{{#if isComplete}}add back to list{{else}}mark completed{{/if}}
 	</button>
 
-	<button class="delete-item" data-id="{{this.id}}">
-		delete from list
+	<button class="alert button small delete-item" data-id="{{this.id}}">
+		remove from list
 	</button>
 </li>
