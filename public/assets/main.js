@@ -30,24 +30,33 @@ $(document).on('click', '.delete-item', function (event) {
 
 });
 
-$(document).on('click', '.toggle-isComplete', function(event){
+$(document).on('click', '.toggle-isComplete', function (event) {
 
   event.preventDefault();
-  
+
   let id = $(this).data('id');
 
-  let isCompleteStatus = $(this).data('iscomplete');
+  //flip the complete status
+  console.log($(this).data('iscomplete'));
+  let newCompleteStatus = !($(this).data('iscomplete'));
+  console.log(newCompleteStatus);
+  let that = this;
+  //this would probably be better to set in the then()
 
   let update = {
-    isComplete: isCompleteStatus
+    isComplete: Boolean(newCompleteStatus)
   };
 
-  $.ajax("/api/list/"+id, 
-  {
-    type: "PUT",
-    data: update
-  }).then(function(){
-    console.log("updated item # " + id);
-    location.reload();
-  })
+  $.ajax("/api/list/" + id,
+    {
+      type: "PUT",
+      data: update
+    }).then(function () {
+      console.log(that);
+      console.log("iscomplete "+$(that).data('iscomplete'));
+      $(that).data('iscomplete', newCompleteStatus);
+      console.log("iscomplete "+$(that).data('iscomplete'));
+      console.log("updated item # " + id);
+      //location.reload();
+    })
 })

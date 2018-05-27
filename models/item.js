@@ -13,9 +13,8 @@ var item = {
     });
   },
   update: function(colVals, condition, cb) {
-    console.log(JSON.stringify(colVals));
-    console.log(condition);
     orm.update(colVals, condition, function(res) {
+
       cb(res);
     });
   },

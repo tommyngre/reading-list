@@ -54,11 +54,13 @@ module.exports = function (app) {
   app.put("/api/list/:id", function (req, res) {
     let condition = "id = " + req.params.id;
 
+    console.log("req.body.isComplete "+req.body.isComplete);
+
     item.update({
       is_complete: req.body.isComplete
     }, condition, function (result) {
       if (result.changedRows == 0) {
-        return res.status(404).end();
+        res.status(404).end();
       } else {
         res.status(200).end();
       }

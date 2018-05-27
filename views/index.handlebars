@@ -13,7 +13,7 @@
 
 <ul>
   {{#each items}}
-    {{#unless sleepy}}
+    {{#unless isComplete}}
       {{> items/item-li isComplete=false}}
     {{/unless}}
   {{/each}}
@@ -24,7 +24,7 @@
 <h1>Recent reads</h1>
 <ul>
   {{#each items}}
-    {{#if sleepy}}
+    {{#if isComplete}}
       {{> items/item-li isComplete=true}}
     {{/if}}
   {{/each}}
