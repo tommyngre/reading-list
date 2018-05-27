@@ -14,7 +14,6 @@ var item = {
   },
   update: function(colVals, condition, cb) {
     orm.update(colVals, condition, function(res) {
-
       cb(res);
     });
   },

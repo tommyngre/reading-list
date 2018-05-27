@@ -13,8 +13,8 @@
 
 <ul>
   {{#each items}}
-    {{#unless isComplete}}
-      {{> items/item-li isComplete=false}}
+    {{#unless is_complete}}
+      {{> items/item-li is_complete=false}}
     {{/unless}}
   {{/each}}
 </ul>
@@ -24,8 +24,8 @@
 <h1>Recent reads</h1>
 <ul>
   {{#each items}}
-    {{#if isComplete}}
-      {{> items/item-li isComplete=true}}
+    {{#if is_complete}}
+      {{> items/item-li iscomplete=true}}
     {{/if}}
   {{/each}}
 </ul>
