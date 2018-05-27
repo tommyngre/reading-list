@@ -1,5 +1,17 @@
+h3{
+  font-family: 'Heebo', sans-serif;
+  font-weight:500;
+}
+
+h1,button{
+  font-family: 'Heebo', sans-serif;
+  font-weight:300;
+}
+
 ul{
   list-style-type: none;
+  background-color:lightcyan;
+  width:90%;
 }
 
 input[type="text"]{

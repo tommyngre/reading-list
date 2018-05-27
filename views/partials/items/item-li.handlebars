@@ -1,12 +1,14 @@
 <li>
-  <div class="large-12 cell">
-	<h3>{{item_name}}</h3>
+	<div class="large-12 cell">
+		<h3>
+			{{#if URL}}
+			<a href="{{item_name}}">{{displayName}}</a>{{else}}{{displayName}}{{/if}}</h3>
 	</div>
-	<button class="button small toggle-isComplete" data-id="{{id}}" data-iscomplete="{{isComplete}}">
+	<button class="button toggle-isComplete" data-id="{{id}}" data-iscomplete="{{isComplete}}">
 		{{#if isComplete}}add back to list{{else}}mark completed{{/if}}
 	</button>
 
-	<button class="alert button small delete-item" data-id="{{this.id}}">
+	<button class="alert button delete-item" data-id="{{this.id}}">
 		remove from list
 	</button>
 </li>
