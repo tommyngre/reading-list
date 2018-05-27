@@ -15,15 +15,39 @@ $(document).on('click', '#add', function () {
   });
 });
 
-$(document).on('click', '.delete-item', function () {
+$(document).on('click', '.delete-item', function (event) {
   event.preventDefault();
 
-  let id = $(this).attr('data-id');
+  let id = $(this).data('id');
 
-  $.ajax("/api/list/" + id, 
-  {
-    type: "PUT,
-    data: "
-  })
+  $.ajax("/api/list/" + id,
+    {
+      type: "DELETE",
+    }).then(function () {
+      console.log("deleted item # " + id);
+      location.reload();
+    })
+
+});
+
+$(document).on('click', '.toggle-isComplete', function(event){
+
+  event.preventDefault();
   
-}
+  let id = $(this).data('id');
+
+  let isCompleteStatus = $(this).data('iscomplete');
+
+  let update = {
+    isComplete: isCompleteStatus
+  };
+
+  $.ajax("/api/list/"+id, 
+  {
+    type: "PUT",
+    data: update
+  }).then(function(){
+    console.log("updated item # " + id);
+    location.reload();
+  })
+})

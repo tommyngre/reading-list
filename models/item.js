@@ -13,7 +13,9 @@ var item = {
     });
   },
   update: function(colVals, condition, cb) {
-    orm.update(objColVals, condition, function(res) {
+    console.log(JSON.stringify(colVals));
+    console.log(condition);
+    orm.update(colVals, condition, function(res) {
       cb(res);
     });
   },

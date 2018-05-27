@@ -55,7 +55,7 @@ module.exports = function (app) {
     let condition = "id = " + req.params.id;
 
     item.update({
-      isComplete: req.body.isComplete
+      is_complete: req.body.isComplete
     }, condition, function (result) {
       if (result.changedRows == 0) {
         return res.status(404).end();
