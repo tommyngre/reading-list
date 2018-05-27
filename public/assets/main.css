@@ -11,6 +11,7 @@ h1,button{
 ul{
   list-style-type: none;
   background-color:lightcyan;
+  padding: 10px 15px 0px 15px;
   width:90%;
 }
 

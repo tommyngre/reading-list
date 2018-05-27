@@ -37,12 +37,13 @@ $(document).on('click', '.toggle-isComplete', function (event) {
   let id = $(this).data('id');
 
   //flip the complete status
-  console.log($(this).data('iscomplete'));
+  console.log(this);
+  console.log("existing complete status " + $(this).data('iscomplete'));
   let newCompleteStatus = !($(this).data('iscomplete'));
-  console.log(newCompleteStatus);
+  console.log("newCompleteStatus "+newCompleteStatus);
   let that = this;
-  //this would probably be better to set in the then()
 
+  
   let update = {
     isComplete: Boolean(newCompleteStatus)
   };
