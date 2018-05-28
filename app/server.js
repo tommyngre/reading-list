@@ -19,7 +19,6 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 
 // Routes
-// =============================================================
 let routes = require("./controllers/item_controller.js");
 
 app.use(routes);
