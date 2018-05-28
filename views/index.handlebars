@@ -3,7 +3,7 @@
   <form>
     <div class="grid-x grid-padding-x">
       <div class="small-12 cell">
-        <input type="text" id="item-name" name="item-name" placeholder="Add the name of a book, or a url to an article...">
+        <input type="text" id="item-name" name="item-name" placeholder="Add a book, or a url to an article...">
       </div>
     </div>
     <div class="grid-x grid-padding-x">
@@ -19,9 +19,9 @@
 
     <div class="small-12 medium-6 cell">
 
-      <h1>Reading List</h1>
+      <h1>Reading list</h1>
       <div class="grid-x grid-padding-x">
-        <ul>
+        <ul id="havent-read">
           {{#each items}} {{#unless is_complete}} {{> items/item-li is_complete=false}} {{/unless}} {{/each}}
         </ul>
       </div>
@@ -30,7 +30,7 @@
 
       <h1>Recent reads</h1>
       <div class="grid-x grid-padding-x">
-        <ul>
+        <ul id="have-read">
           {{#each items}} {{#if is_complete}} {{> items/item-li iscomplete=true}} {{/if}} {{/each}}
         </ul>
       </div>

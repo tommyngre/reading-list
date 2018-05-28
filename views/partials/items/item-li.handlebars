@@ -5,7 +5,7 @@
 			<a href="{{item_name}}">{{displayName}}</a>{{else}}{{displayName}}{{/if}}</h3>
 	</div>
 	<button class="button toggle-isComplete" data-id="{{id}}" data-iscomplete="{{is_complete}}">
-		{{#if isComplete}}add back to list{{else}}mark completed{{/if}}
+		{{#if is_complete}}add back to list{{else}}mark completed{{/if}}
 	</button>
 
 	<button class="alert button delete-item" data-id="{{this.id}}">

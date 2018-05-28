@@ -8,6 +8,15 @@ h1{
   font-weight:300;
 }
 
+.none-yet{
+  font-family: 'Heebo', sans-serif;
+  font-weight: 100;
+  font-style: italic;
+  padding: 10px 15px 0px 15px;
+  margin: 0px 10px 10px 0px;
+  color:darkslategray;
+}
+
 .button{
   font-family: 'Montserrat Alternates', sans-serif;
   font-weight:300;
@@ -15,9 +24,13 @@ h1{
 
 ul{
   list-style-type: none;
+  width:95%;
+}
+
+li{
   background-color:lightcyan;
   padding: 10px 15px 0px 15px;
-  width:90%;
+  margin-bottom:10px;
 }
 
 input[type="text"]{

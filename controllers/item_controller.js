@@ -24,8 +24,8 @@ module.exports = function (app) {
           row['URL'] = false;
         }
         //check length
-        if (n.length > 30) {
-          row['displayName'] = n.substring(0, 25)+'...';
+        if (n.length > 20) {
+          row['displayName'] = n.substring(0, 17)+'...';
         } else {
           row['displayName'] = n;
         }

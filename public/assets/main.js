@@ -1,5 +1,47 @@
+function checkSectionContents() {
+
+  if ($('#havent-read').find('li').length < 1) {
+    console.log("havent-read");
+    let html = `<h3 class="none-yet">None yet.</h3>`
+    $('#havent-read').append(html);
+  };
+  if ($('#have-read').find('li').length < 1){
+    console.log("have-read");
+    let html = `<h3 class="none-yet">None yet.</h3>`
+    $('#have-read').append(html);
+  };
+}
+
+function showErr(errMessage) {
+  $('#item-name').css('color', 'red').val(errMessage);
+  setTimeout(function () {
+    $('#item-name').css('color', 'black').val("");
+  }, 1000);
+}
+
+function validate(entry) {
+  let isValid = true;
+  let errMessage;
+  //enforce non null
+  if (entry == "") {
+    isValid = false;
+    showErr("Enter something, dude :P")
+  }
+  //enforce len
+  if (entry.length > 250) {
+    isValid = false;
+    showErr("255 character max, dude :P")
+  }
+  return isValid;
+}
+
 $(document).on('click', '#add', function () {
   event.preventDefault();
+
+  //validate entry
+  if (!validate($('#item-name').val().trim())) {
+    return;
+  }
 
   let obj = {
     itemName: $('#item-name').val().trim(),
@@ -40,10 +82,10 @@ $(document).on('click', '.toggle-isComplete', function (event) {
   console.log(this);
   console.log("existing complete status " + $(this).data('iscomplete'));
   let newCompleteStatus = !($(this).data('iscomplete'));
-  console.log("newCompleteStatus "+newCompleteStatus);
+  console.log("newCompleteStatus " + newCompleteStatus);
   let that = this;
 
-  
+
   let update = {
     isComplete: Boolean(newCompleteStatus)
   };
@@ -57,3 +99,10 @@ $(document).on('click', '.toggle-isComplete', function (event) {
       location.reload();
     })
 })
+
+$(document).ready(function () {
+  //handle if sections are null
+  setTimeout(function () {
+    checkSectionContents();
+  }, 100);
+});
