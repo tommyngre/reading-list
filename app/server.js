@@ -20,7 +20,9 @@ app.use(express.static("public"));
 
 // Routes
 // =============================================================
-require("./controllers/item_controller.js")(app);
+let routes = require("./controllers/item_controller.js");
+
+app.use(routes);
 
 // Starts the server to begin listening
 // =============================================================

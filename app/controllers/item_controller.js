@@ -4,12 +4,11 @@ let item = require('../models/item.js');
 
 
 //create the router and export
+var router = express.Router();
 
 // Routes
 // =============================================================
-module.exports = function (app) {
-
-  app.get("/", function (req, res) {
+  router.get("/", function (req, res) {
 
     item.all(function (data) {
 
@@ -42,7 +41,7 @@ module.exports = function (app) {
 
   });
 
-  app.get("/api/list", function (req, res) {
+  router.get("/api/list", function (req, res) {
 
     item.all(function (data) {
       let obj = {
@@ -54,7 +53,7 @@ module.exports = function (app) {
 
   });
 
-  app.post("/api/new", function (req, res) {
+  router.post("/api/new", function (req, res) {
 
     item.add(
       [
@@ -71,7 +70,7 @@ module.exports = function (app) {
       });
   });
 
-  app.put("/api/list/:id", function (req, res) {
+  router.put("/api/list/:id", function (req, res) {
     let condition = "id = " + req.params.id;
 
     console.log("req.body.isComplete " + req.body.isComplete);
@@ -87,7 +86,7 @@ module.exports = function (app) {
     });
   });
 
-  app.delete("/api/list/:id", function (req, res) {
+  router.delete("/api/list/:id", function (req, res) {
     var condition = "id = " + req.params.id;
 
     item.delete(condition, function (result) {
@@ -99,4 +98,4 @@ module.exports = function (app) {
     });
   });
 
-};
+module.exports = router;
