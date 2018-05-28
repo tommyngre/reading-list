@@ -2,12 +2,10 @@
 function checkSectionContents() {
 
   if ($('#havent-read').find('li').length < 1) {
-    console.log("havent-read");
     let html = `<h3 class="none-yet">None yet.</h3>`
     $('#havent-read').append(html);
   };
   if ($('#have-read').find('li').length < 1){
-    console.log("have-read");
     let html = `<h3 class="none-yet">None yet.</h3>`
     $('#have-read').append(html);
   };

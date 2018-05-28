@@ -26,7 +26,6 @@ function newVals(colVals) {
 //SQL helper function
 function questionMarks(vals) {
   let valsAry = vals.map(x => "?").join(",");
-  console.log(vals);
   return valsAry;
 }
 

@@ -64,17 +64,13 @@ router.post("/api/new", function (req, res) {
       Boolean(req.body.isComplete)
     ],
     function (result) {
-      console.log("result " + result);
       res.json({ id: result.insertId });
-      console.log("result.insertId " + result.insertId);
     });
 });
 
 //PUT update row status
 router.put("/api/list/:id", function (req, res) {
   let condition = "id = " + req.params.id;
-
-  console.log("req.body.isComplete " + req.body.isComplete);
 
   item.update({
     is_complete: req.body.isComplete
