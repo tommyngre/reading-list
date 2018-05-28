@@ -1,8 +1,9 @@
 let connection = require('./connection.js')
 
+//convert object to valid SQL
 function newVals(colVals) {
 
-  console.log("colVals "+JSON.stringify(colVals));
+  //console.log("colVals "+JSON.stringify(colVals));
 
   let arr = [];
 
@@ -22,6 +23,7 @@ function newVals(colVals) {
   return arr.toString();
 }
 
+//SQL helper function
 function questionMarks(vals) {
   let valsAry = vals.map(x => "?").join(",");
   console.log(vals);
@@ -34,38 +36,30 @@ let orm = {
   all: function (cb) {
 
     connection.query("select * from list", function (err, data) {
-
       if (err) throw err;
-
       cb(data);
     });
   },
 
   add: function (cols, vals, cb) {
-
     let valQuestionMarks = questionMarks(vals);
 
     let query = "insert into list ";
     query += "(" + cols + ") values ";
     query += "(" + valQuestionMarks + ");";
 
-    console.log(query);
-
     connection.query(query, vals, function (err, data) {
       if (err) {
         throw err;
       }
-      console.log(cb.toString());
       cb(data);
     });
   },
-  update: function (colVals, condition, cb) {
 
+  update: function (colVals, condition, cb) {
     let query = "update list set ";
     query += newVals(colVals);
     query += " where " + condition;
-
-    console.log(query);
 
     connection.query(query, function (err, data) {
       if (err) throw err;
@@ -74,12 +68,10 @@ let orm = {
     });
 
   },
-  delete: function (condition, cb) {
 
+  delete: function (condition, cb) {
     let query = "delete from list";
     query += " where " + condition;
-
-    console.log(query);
 
     connection.query(query, function (error, result) {
       if (error) {

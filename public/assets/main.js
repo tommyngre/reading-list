@@ -1,3 +1,4 @@
+// if nothing in either list, display message
 function checkSectionContents() {
 
   if ($('#havent-read').find('li').length < 1) {
@@ -12,6 +13,7 @@ function checkSectionContents() {
   };
 }
 
+//show message for invalid entry
 function showErr(errMessage) {
   $('#item-name').css('color', 'red').val(errMessage);
   setTimeout(function () {
@@ -19,6 +21,7 @@ function showErr(errMessage) {
   }, 1000);
 }
 
+//validate entry
 function validate(entry) {
   let isValid = true;
   let errMessage;
@@ -35,6 +38,8 @@ function validate(entry) {
   return isValid;
 }
 
+//CRUD ROUTES BELOW
+
 $(document).on('click', '#add', function () {
   event.preventDefault();
 
@@ -50,9 +55,6 @@ $(document).on('click', '#add', function () {
 
   $.post('/api/new', obj, function (data) {
   }).then(function () {
-
-    console.log("created " + obj.itemName);
-
     location.reload();
   });
 });
@@ -66,25 +68,19 @@ $(document).on('click', '.delete-item', function (event) {
     {
       type: "DELETE",
     }).then(function () {
-      console.log("deleted item # " + id);
       location.reload();
     })
 
 });
 
 $(document).on('click', '.toggle-isComplete', function (event) {
-
   event.preventDefault();
 
   let id = $(this).data('id');
 
   //flip the complete status
-  console.log(this);
-  console.log("existing complete status " + $(this).data('iscomplete'));
   let newCompleteStatus = !($(this).data('iscomplete'));
-  console.log("newCompleteStatus " + newCompleteStatus);
   let that = this;
-
 
   let update = {
     isComplete: Boolean(newCompleteStatus)
