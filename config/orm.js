@@ -32,19 +32,19 @@ function questionMarks(vals) {
 
 let orm = {
 
-  all: function (cb) {
+  all: function (table, cb) {
 
-    connection.query("select * from list", function (err, data) {
+    connection.query("select * from " + table + ";", function (err, data) {
       if (err) throw err;
       cb(data);
     });
   },
 
-  add: function (cols, vals, cb) {
+  add: function (table, cols, vals, cb) {
     let valQuestionMarks = questionMarks(vals);
 
-    let query = "insert into list ";
-    query += "(" + cols + ") values ";
+    let query = "insert into " + table;
+    query += " (" + cols + ") values ";
     query += "(" + valQuestionMarks + ");";
 
     connection.query(query, vals, function (err, data) {
@@ -55,8 +55,8 @@ let orm = {
     });
   },
 
-  update: function (colVals, condition, cb) {
-    let query = "update list set ";
+  update: function (table, colVals, condition, cb) {
+    let query = "update " + table + " set ";
     query += newVals(colVals);
     query += " where " + condition;
 
@@ -68,8 +68,8 @@ let orm = {
 
   },
 
-  delete: function (condition, cb) {
-    let query = "delete from list";
+  delete: function (table, condition, cb) {
+    let query = "delete from " + table;
     query += " where " + condition;
 
     connection.query(query, function (error, result) {
